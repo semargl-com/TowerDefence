@@ -18,24 +18,13 @@ public class Main {
 
     public static void main(String[] args) {
         Location location = initLocation();
-        State state = startContainer(location);
-    }
-
-    public static State startContainer(Location location) {
-        State state = new State();
-        state.location = location;
-        state.money = 1000;
-        state.monsters = new LinkedList<>();
-        state.waveNumber = 1;
-        state.wave = new Wave();
-        state.weapons = new HashMap<>();
-        return state;
+        State state = new State(location);
     }
 
     public static Location initLocation() {
         Location location = new Location();
         location.size = new Point(500, 500);
-        location.health = 200;
+        location.startHealth = 200;
         location.firePoints = Arrays.asList(
                 new Point(56, 103), new Point(172, 103), new Point(382, 103),
                 new Point(264, 207), new Point(200, 260), new Point(164, 332),

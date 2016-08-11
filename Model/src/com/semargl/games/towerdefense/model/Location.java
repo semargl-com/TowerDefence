@@ -9,7 +9,8 @@ import java.util.List;
 
 public class Location {
     public Point size;
-    public int health;
+    public int startHealth;
+    public int startMoney;
     public List<Point> firePoints;
     public List<MonsterPath> monsterPaths;
     public List<LevelWaves> levelWaves;
