@@ -13,24 +13,28 @@ import java.util.Map;
 public class State {
 
     public Location location;
+    public int difficultyLevel;
 
     public int health;
     public int money;
-    public int waveNumber = 0;
+    public int waveNumber = -1;
     public long lastTime;
+    public int monsterNumber = 0;
+    public boolean finished = false;
 
     public Map<Point, Weapon> weapons = new HashMap<>();
     public Wave wave = new Wave();
     public List<Monster> monsters = new LinkedList<>();
 
-    public State(Location location) {
+    public State(Location location, int difficultyLevel) {
         this.location = location;
+        this.difficultyLevel = difficultyLevel;
         health = location.startHealth;
         money = location.startMoney;
     }
 
     public void next() {
-        if (waveNumber == 0) {
+        if (waveNumber == -1) {
             lastTime = System.currentTimeMillis();
             waveNumber++;
             return;
@@ -48,6 +52,8 @@ public class State {
 
         }
 
+        checkIsFinished();
+
         lastTime = currTime;
     }
 
@@ -57,6 +63,14 @@ public class State {
             return true;
         } catch (InterruptedException e) {
             return false;
+        }
+    }
+
+    private void checkIsFinished() {
+        if (waveNumber == location.levelWaves.size() - 1 &&
+                monsters.size() == 0 &&
+                monsterNumber == location.levelWaves.get(difficultyLevel).waveClasses.get(waveNumber).monsterClasses.size()) {
+            finished = true;
         }
     }
 }
