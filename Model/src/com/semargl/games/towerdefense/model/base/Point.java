@@ -33,4 +33,9 @@ public class Point {
     public int hashCode() {
         return y * 10_000 + x;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ')';
+    }
 }

@@ -2,7 +2,11 @@ package com.semargl.games.towerdefense.model.wave;
 
 public class Wave {
 
-    public int lastMonsterNumber;
+    public WaveClass waveClass;
+    public int lastMonsterNumber = -1;
     public long lastMonsterTime;
 
+    public Wave(WaveClass waveClass) {
+        this.waveClass = waveClass;
+    }
 }

@@ -18,6 +18,13 @@ public class Main {
     public static void main(String[] args) {
         Location location = initLocation();
         State state = new State(location, 0);
+        do {
+            state.next();
+            if (!state.sleep(1000))
+                break;
+            Log.debug("1");
+        } while(!state.finished);
+        Log.debug("finished");
     }
 
     public static Location initLocation() {
@@ -34,12 +41,12 @@ public class Main {
                 new Point(959, 467), new Point(368, 395), new Point(300, 300),
                 new Point(400, 170), new Point(499, 170))));
         location.levelWaves = Arrays.asList(new LevelWaves(Arrays.asList(
-                new WaveClass(0,
+                new WaveClass(location.monsterPaths.get(0),
                         Arrays.asList(MONSTER_ZOMBIE, MONSTER_ZOMBIE, MONSTER_ZOMBIE),
-                        Arrays.asList(3000L, 3000L, 3000L)),
-                new WaveClass(0,
+                        Arrays.asList(3000L, 3000L, 5000L)),
+                new WaveClass(location.monsterPaths.get(0),
                         Arrays.asList(MONSTER_ZOMBIE, MONSTER_ZOMBIE, MONSTER_ZOMBIE, MONSTER_ZOMBIE, MONSTER_ZOMBIE),
-                        Arrays.asList(1000L, 1000L, 2000L, 1000L, 1000L))
+                        Arrays.asList(1000L, 1000L, 2000L, 1000L, 5000L))
         )));
         location.weaponClasses = Arrays.asList(WEAPON_MACHINEGUN);
         return location;
@@ -47,7 +54,8 @@ public class Main {
 
     public static MonsterClass MONSTER_ZOMBIE = new MonsterClass(
             Arrays.asList(50, 60, 75, 85, 100),
-            MonsterType.Land);
+            MonsterType.Land,
+            "Zombie");
 
     public static WeaponClass WEAPON_MACHINEGUN = new WeaponClass(
             Arrays.asList(MonsterType.Land, MonsterType.Flying),

@@ -28,4 +28,8 @@ public class Direction {
         return Math.abs(this.angle - angle) < threshold; // TODO case when over Pi
     }
 
+    @Override
+    public String toString() {
+        return "<" + angle + '>';
+    }
 }

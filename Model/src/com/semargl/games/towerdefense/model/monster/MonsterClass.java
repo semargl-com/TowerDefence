@@ -6,10 +6,12 @@ public class MonsterClass {
 
     public List<Integer> levelHealth;
     public MonsterType type;
+    public String name;
 
-    public MonsterClass(List<Integer> levelHealth, MonsterType type) {
+    public MonsterClass(List<Integer> levelHealth, MonsterType type, String name) {
         this.levelHealth = levelHealth;
         this.type = type;
+        this.name = name;
     }
 
 }
