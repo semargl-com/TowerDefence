@@ -11,29 +11,36 @@ public class Monster {
     public int health;
     public MonsterPath monsterPath;
     public int pathSegmentNumber;
-    public int offsetInPathSegment;
+    public double offsetInPathSegment;
 
     public Point coord;
     public Direction direction;
 
-    public Monster(MonsterClass monsterClass, MonsterPath monsterPath, int difficultyLevel) { // Point coord, Direction direction) {
+    public Monster(MonsterClass monsterClass, MonsterPath monsterPath, int difficultyLevel) {
         this.monsterClass = monsterClass;
         this.monsterPath = monsterPath;
         health = monsterClass.levelHealth.get(difficultyLevel);
-        //this.coord = coord;
-        //this.direction = direction;
+        recalculatePosition();
         Log.debug("Created monster: " + toString());
     }
 
     public void go(long duration) {
         if (monsterState == MonsterState.Normal) {
-            int distance = (int)(duration * monsterClass.speed / 60_000);
-
+            double distance = duration * monsterClass.speed / 60_000;
+            double leftInSegment = coord.distance(monsterPath.segment.get(pathSegmentNumber + 1));
+            if (distance > leftInSegment) {
+                pathSegmentNumber++;
+                offsetInPathSegment = 0;
+            } else {
+                offsetInPathSegment += distance;
+            }
+            recalculatePosition();
         }
     }
 
     private void recalculatePosition() {
-
+        coord = monsterPath.getCoord(pathSegmentNumber, offsetInPathSegment);
+        direction = monsterPath.getDirection(pathSegmentNumber);
     }
 
     @Override

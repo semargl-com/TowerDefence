@@ -4,10 +4,10 @@ public class WeaponLevel {
     public int price;
     public int power;
     public int speed;
-    public int distance;
+    public double distance;
     public int special;
 
-    public WeaponLevel(int price, int power, int speed, int distance, int special) {
+    public WeaponLevel(int price, int power, int speed, double distance, int special) {
         this.price = price;
         this.power = power;
         this.speed = speed;

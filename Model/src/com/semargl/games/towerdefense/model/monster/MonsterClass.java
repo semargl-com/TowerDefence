@@ -6,10 +6,10 @@ public class MonsterClass {
 
     public List<Integer> levelHealth;
     public MonsterType type;
-    public int speed; // pixels per minute
+    public double speed; // pixels per minute
     public String name;
 
-    public MonsterClass(List<Integer> levelHealth, MonsterType type, int speed, String name) {
+    public MonsterClass(List<Integer> levelHealth, MonsterType type, double speed, String name) {
         this.levelHealth = levelHealth;
         this.type = type;
         this.speed = speed;

@@ -13,7 +13,7 @@ public class MonsterPath {
         this.segment = segment;
     }
 
-    public Point getCoord(int segmentNumber, int offset) {
+    public Point getCoord(int segmentNumber, double offset) {
         Point coord = segment.get(segmentNumber);
         return coord; ////////
 //        Point nextSegmentCoord = wave.waveClass.monsterPath.segment.get(1);

@@ -1,12 +1,12 @@
 package com.semargl.games.towerdefense.model.base;
 
 public class Point {
-    public int x;
-    public int y;
+    public double x;
+    public double y;
 
     public Point() {}
 
-    public Point(int x, int y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -30,11 +30,11 @@ public class Point {
 
     @Override
     public int hashCode() {
-        return y * 10_000 + x;
+        return (int)y * 10_000 + (int)(x);
     }
 
     @Override
     public String toString() {
-        return "(" + x + "," + y + ')';
+        return "(" + (int)x + "," + (int)y + ')';
     }
 }
