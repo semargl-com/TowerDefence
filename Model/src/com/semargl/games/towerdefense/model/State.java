@@ -98,10 +98,10 @@ public class State {
     private void pushNextMonster() {
         wave.lastMonsterNumber++;
         MonsterClass monsterClass = wave.waveClass.monsterClasses.get(wave.lastMonsterNumber);
-        Point coord = wave.waveClass.monsterPath.segment.get(0);
-        Point nextSegmentCoord = wave.waveClass.monsterPath.segment.get(1);
-        Direction direction = new Direction(coord, nextSegmentCoord);
-        Monster newMonster = new Monster(monsterClass, difficultyLevel, coord, direction);
+//        Point coord = wave.waveClass.monsterPath.segment.get(0);
+//        Point nextSegmentCoord = wave.waveClass.monsterPath.segment.get(1);
+//        Direction direction = new Direction(coord, nextSegmentCoord);
+        Monster newMonster = new Monster(monsterClass, wave.waveClass.monsterPath, difficultyLevel);
         monsters.add(newMonster);
         wave.lastMonsterTime = currTime;
     }

@@ -10,12 +10,20 @@ import com.semargl.games.towerdefense.model.wave.LevelWaves;
 import com.semargl.games.towerdefense.model.wave.WaveClass;
 import com.semargl.games.towerdefense.model.weapon.WeaponClass;
 import com.semargl.games.towerdefense.model.weapon.WeaponLevel;
+import com.semargl.games.towerdefense.test.PointTest;
 
 import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
+        //game();
+        PointTest.testAngle();
+        //PointTest.testAngleMostlyVertical();
+        PointTest.testAngleGrowing();
+    }
+
+    public static void game() {
         Location location = initLocation();
         State state = new State(location, 0);
         do {
@@ -55,6 +63,7 @@ public class Main {
     public static MonsterClass MONSTER_ZOMBIE = new MonsterClass(
             Arrays.asList(50, 60, 75, 85, 100),
             MonsterType.Land,
+            1000,
             "Zombie");
 
     public static WeaponClass WEAPON_MACHINEGUN = new WeaponClass(

@@ -9,18 +9,30 @@ public class Monster {
     public MonsterClass monsterClass;
     public MonsterState monsterState = MonsterState.Normal;
     public int health;
+    public MonsterPath monsterPath;
+    public int pathSegmentNumber;
+    public int offsetInPathSegment;
+
     public Point coord;
     public Direction direction;
 
-    public Monster(MonsterClass monsterClass, int difficultyLevel, Point coord, Direction direction) {
+    public Monster(MonsterClass monsterClass, MonsterPath monsterPath, int difficultyLevel) { // Point coord, Direction direction) {
         this.monsterClass = monsterClass;
+        this.monsterPath = monsterPath;
         health = monsterClass.levelHealth.get(difficultyLevel);
-        this.coord = coord;
-        this.direction = direction;
+        //this.coord = coord;
+        //this.direction = direction;
         Log.debug("Created monster: " + toString());
     }
 
     public void go(long duration) {
+        if (monsterState == MonsterState.Normal) {
+            int distance = (int)(duration * monsterClass.speed / 60_000);
+
+        }
+    }
+
+    private void recalculatePosition() {
 
     }
 
