@@ -15,10 +15,11 @@ public class MonsterPath {
 
     public Point getCoord(int segmentNumber, double offset) {
         Point coord = segment.get(segmentNumber);
-        return coord; ////////
-//        Point nextSegmentCoord = wave.waveClass.monsterPath.segment.get(1);
-//        Direction direction = new Direction(coord, nextSegmentCoord);
-
+        Direction direction = getDirection(segmentNumber);
+        double angle = direction.angle;
+        double coefX = (!direction.isGrowingY()) ? Math.asin(angle) : -Math.asin(angle);
+        double coefY = direction.isGrowingX() ? Math.asin(angle - Math.PI / 2) : -Math.asin(angle - Math.PI / 2);
+        return new Point(coord.x + (offset * coefX), coord.y + (offset * coefY));
     }
 
     public Direction getDirection(int segmentNumber) {
