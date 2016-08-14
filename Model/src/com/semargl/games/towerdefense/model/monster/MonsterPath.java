@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MonsterPath {
 
-    public List<Point> segment; // can get direction because it's lines
+    public List<Point> segment;
 
     public MonsterPath(List<Point> segment) {
         this.segment = segment;
@@ -16,10 +16,7 @@ public class MonsterPath {
     public Point getCoord(int segmentNumber, double offset) {
         Point coord = segment.get(segmentNumber);
         Direction direction = getDirection(segmentNumber);
-        double angle = direction.angle;
-        double coefX = (!direction.isGrowingY()) ? Math.asin(angle) : -Math.asin(angle);
-        double coefY = direction.isGrowingX() ? Math.asin(angle - Math.PI / 2) : -Math.asin(angle - Math.PI / 2);
-        return new Point(coord.x + (offset * coefX), coord.y + (offset * coefY));
+        return coord.getOffsetCoord(direction, offset);
     }
 
     public Direction getDirection(int segmentNumber) {

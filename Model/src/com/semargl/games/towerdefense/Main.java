@@ -18,9 +18,7 @@ public class Main {
 
     public static void main(String[] args) {
         //game();
-        PointTest.testAngle();
-        //PointTest.testAngleMostlyVertical();
-        PointTest.testAngleGrowing();
+        PointTest.testAll();
     }
 
     public static void game() {

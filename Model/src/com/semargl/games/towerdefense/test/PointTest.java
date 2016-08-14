@@ -11,14 +11,28 @@ public class PointTest {
     static Point p1x = new Point(10, 30);
     static Point p1y = new Point(30, 20);
 
-    public static void all() {
+    public static void testAll() {
         Log.debug("\n");
 
-        testDistance();
-        testAngle();
-        testDirection();
+        testOffsetCoord();
+        //testDistance();
+        //testAngle();
+        //testDirection();
 
         Log.debug("");
+    }
+
+    public static void testOffsetCoord() {
+        //Point p = new Point();
+        Log.debug("DOWN_RIGHT x: " + new Direction(Direction.DOWN_RIGHT).xCoef());
+        Log.debug("DOWN_RIGHT y: " + new Direction(Direction.DOWN_RIGHT).yCoef());
+        Log.debug("UP_LEFT x: " + new Direction(Direction.UP_LEFT).xCoef());
+        Log.debug("UP_LEFT y: " + new Direction(Direction.UP_LEFT).yCoef());
+        Log.debug("UP_RIGHT x: " + new Direction(Direction.UP_RIGHT).xCoef());
+        Log.debug("UP_RIGHT y: " + new Direction(Direction.UP_RIGHT).yCoef());
+        Log.debug("DOWN_LEFT x: " + new Direction(Direction.DOWN_LEFT).xCoef());
+        Log.debug("DOWN_LEFT y: " + new Direction(Direction.DOWN_LEFT).yCoef());
+        //Log.debug("distance p1 p2: " + p.getOffsetCoord(new Direction(Direction.DOWN_RIGHT), 10));
     }
 
     public static void testDistance() {
@@ -48,25 +62,25 @@ public class PointTest {
         Log.debug("");
     }
 
-    public static void testAngleMostlyVertical() {
-        Log.debug("angle p1 p2 vert: " + new Direction(p1.angle(p2)).isMostlyVertical());
-        Log.debug("angle p2 p1 vert: " + new Direction(p2.angle(p1)).isMostlyVertical());
-        Log.debug("angle p1 p1x vert: " + new Direction(p1.angle(p1x)).isMostlyVertical());
-        Log.debug("angle p1x p1 vert: " + new Direction(p1x.angle(p1)).isMostlyVertical());
-        Log.debug("angle p1 p1y vert: " + new Direction(p1.angle(p1y)).isMostlyVertical());
-        Log.debug("angle p1y p1 vert: " + new Direction(p1y.angle(p1)).isMostlyVertical());
-        Log.debug("angle p2 p1y vert: " + new Direction(p2.angle(p1y)).isMostlyVertical());
-    }
-
-    public static void testAngleGrowing() {
-        Log.debug("angle p1 p2 grow x y: " + new Direction(p1.angle(p2)).isGrowingX() + " " + new Direction(p1.angle(p2)).isGrowingY());
-        Log.debug("angle p2 p1 grow x y: " + new Direction(p2.angle(p1)).isGrowingX() + " " + new Direction(p2.angle(p1)).isGrowingY());
-        Log.debug("angle p1 p1x grow x y: " + new Direction(p1.angle(p1x)).isGrowingX() + " " + new Direction(p1.angle(p1x)).isGrowingY());
-        Log.debug("angle p1x p1 grow x y: " + new Direction(p1x.angle(p1)).isGrowingX() + " " + new Direction(p1x.angle(p1)).isGrowingY());
-        Log.debug("angle p1 p1y grow x y: " + new Direction(p1.angle(p1y)).isGrowingX() + " " + new Direction(p1.angle(p1y)).isGrowingY());
-        Log.debug("angle p1y p1 grow x y: " + new Direction(p1y.angle(p1)).isGrowingX() + " " + new Direction(p1y.angle(p1)).isGrowingY());
-        Log.debug("angle p2 p1y grow x y: " + new Direction(p2.angle(p1y)).isGrowingX() + " " + new Direction(p2.angle(p1y)).isGrowingY());
-    }
+//    public static void testAngleMostlyVertical() {
+//        Log.debug("angle p1 p2 vert: " + new Direction(p1.angle(p2)).isMostlyVertical());
+//        Log.debug("angle p2 p1 vert: " + new Direction(p2.angle(p1)).isMostlyVertical());
+//        Log.debug("angle p1 p1x vert: " + new Direction(p1.angle(p1x)).isMostlyVertical());
+//        Log.debug("angle p1x p1 vert: " + new Direction(p1x.angle(p1)).isMostlyVertical());
+//        Log.debug("angle p1 p1y vert: " + new Direction(p1.angle(p1y)).isMostlyVertical());
+//        Log.debug("angle p1y p1 vert: " + new Direction(p1y.angle(p1)).isMostlyVertical());
+//        Log.debug("angle p2 p1y vert: " + new Direction(p2.angle(p1y)).isMostlyVertical());
+//    }
+//
+//    public static void testAngleGrowing() {
+//        Log.debug("angle p1 p2 grow x y: " + new Direction(p1.angle(p2)).isGrowingX() + " " + new Direction(p1.angle(p2)).isGrowingY());
+//        Log.debug("angle p2 p1 grow x y: " + new Direction(p2.angle(p1)).isGrowingX() + " " + new Direction(p2.angle(p1)).isGrowingY());
+//        Log.debug("angle p1 p1x grow x y: " + new Direction(p1.angle(p1x)).isGrowingX() + " " + new Direction(p1.angle(p1x)).isGrowingY());
+//        Log.debug("angle p1x p1 grow x y: " + new Direction(p1x.angle(p1)).isGrowingX() + " " + new Direction(p1x.angle(p1)).isGrowingY());
+//        Log.debug("angle p1 p1y grow x y: " + new Direction(p1.angle(p1y)).isGrowingX() + " " + new Direction(p1.angle(p1y)).isGrowingY());
+//        Log.debug("angle p1y p1 grow x y: " + new Direction(p1y.angle(p1)).isGrowingX() + " " + new Direction(p1y.angle(p1)).isGrowingY());
+//        Log.debug("angle p2 p1y grow x y: " + new Direction(p2.angle(p1y)).isGrowingX() + " " + new Direction(p2.angle(p1y)).isGrowingY());
+//    }
 
     public static void testDirection() {
 //        Log.debug("direction 0.23: " + new Direction(0.23).at(p1, p2));

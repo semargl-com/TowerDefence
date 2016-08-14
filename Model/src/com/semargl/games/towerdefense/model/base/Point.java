@@ -19,6 +19,10 @@ public class Point {
         return Math.atan2(y - p.y, x - p.x) - Math.PI / 2;
     }
 
+    public Point getOffsetCoord(Direction direction, double offset) {
+        return new Point(x + (offset * direction.xCoef()), y + (offset * direction.yCoef()));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
