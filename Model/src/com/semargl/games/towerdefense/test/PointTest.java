@@ -11,7 +11,7 @@ public class PointTest {
     static Point p1x = new Point(10, 30);
     static Point p1y = new Point(30, 20);
 
-    public static void testAll() {
+    public static void main(String[] args) {
         Log.debug("\n");
 
         testOffsetCoord();

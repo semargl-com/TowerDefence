@@ -9,4 +9,8 @@ public class Log {
             System.out.println(s);
         }
     }
+
+    public static void error(String s) {
+        System.out.println("[ERROR] " + s);
+    }
 }

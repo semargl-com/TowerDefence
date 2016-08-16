@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class State {
 
@@ -26,8 +29,8 @@ public class State {
     public boolean finished = false;
 
     public Wave wave;
-    public Map<Point, Weapon> weapons = new HashMap<>();
-    public List<Monster> monsters = new LinkedList<>();
+    public Map<Point, Weapon> weapons = new ConcurrentHashMap<>();
+    public List<Monster> monsters = new CopyOnWriteArrayList<>();
 
     public State(Location location, int difficultyLevel) {
         this.location = location;
@@ -53,16 +56,6 @@ public class State {
         checkIsFinished();
 
         lastTime = currTime;
-    }
-
-    public boolean sleep(long time) {
-        try {
-            Thread.sleep(time);
-            return true;
-        } catch (InterruptedException e) {
-            Log.debug("Interrupted");
-            return false;
-        }
     }
 
     private void checkWave() {
