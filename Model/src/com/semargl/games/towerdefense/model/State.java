@@ -47,6 +47,7 @@ public class State {
 
         for (Point weaponPoint : weapons.keySet()) {
             Weapon weapon = weapons.get(weaponPoint);
+            weapon.go(duration, monsters);
         }
 
         for (Monster monster : monsters) {

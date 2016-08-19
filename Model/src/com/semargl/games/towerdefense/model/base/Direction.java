@@ -25,29 +25,44 @@ public class Direction {
         this.angle = Math.atan2(from.y - to.y, from.x - to.x) - Math.PI / 2;
     }
 
-    public boolean approxEquals(Point from, Point to) {
-        return approxEquals(new Direction(from, to).angle, DEFAULT_THRESHOLD);
+    public boolean almostEquals(Point from, Point to) {
+        return almostEquals(new Direction(from, to).angle, DEFAULT_THRESHOLD);
     }
 
-    public boolean approxEquals(double angle) {
-        return approxEquals(angle, DEFAULT_THRESHOLD);
+    public boolean almostEquals(double angle) {
+        return almostEquals(angle, DEFAULT_THRESHOLD);
     }
 
-    public boolean approxEquals(double angle, double threshold) {
+    public boolean almostEquals(double angle, double threshold) {
         return Math.abs(this.angle - angle) < threshold; // TODO case when over Pi
+    }
+
+    public void rotate(double targetAngle, double angleStep) {
+        double angleDistance = angle - targetAngle;
+        if (angleDistance < 0)
+            angleDistance = -angleDistance;
+        if (angleDistance <= angleStep) {
+            angle = targetAngle;
+            return;
+        }
+        if (targetAngle < angle) {
+            angle -= angleStep;
+        } else {
+            angle += angleStep;
+        }
     }
 
 //    public boolean isMostlyVertical() {
 //        return (angle > UP_LEFT && angle < UP_RIGHT) || (angle > DOWN_RIGHT && angle < DOWN_LEFT);
 //    }
 //
-    public boolean isGrowingX() {
-        return angle > 0 || angle < -Math.PI;
-    }
-
-    public boolean isGrowingY() {
-        return angle < (-Math.PI / 2);
-    }
+//    public boolean isGrowingX() {
+//        return angle > 0 || angle < -Math.PI;
+//    }
+//
+//    public boolean isGrowingY() {
+//        return angle < (-Math.PI / 2);
+//    }
 
     public double xCoef() {
         if (angle == Direction.UP || angle == Direction.DOWN)

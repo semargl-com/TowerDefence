@@ -3,13 +3,14 @@ package com.semargl.games.towerdefense.model.weapon;
 import com.semargl.games.towerdefense.model.monster.MonsterType;
 
 import java.util.List;
+import java.util.Set;
 
 public class WeaponClass {
-    public List<MonsterType> attackMonsterTypes;
-    public List<WeaponLevel> weaponLevels;
+    public Set<MonsterType> attackMonsterTypes;
+    public List<WeaponSpec> weaponSpecs;
 
-    public WeaponClass(List<MonsterType> attackMonsterTypes, List<WeaponLevel> weaponLevels) {
+    public WeaponClass(Set<MonsterType> attackMonsterTypes, List<WeaponSpec> weaponSpecs) {
         this.attackMonsterTypes = attackMonsterTypes;
-        this.weaponLevels = weaponLevels;
+        this.weaponSpecs = weaponSpecs;
     }
 }

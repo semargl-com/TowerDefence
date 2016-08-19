@@ -38,6 +38,13 @@ public class Monster {
         }
     }
 
+    public void hit(int damage) {
+        health -= damage;
+        if (health < 0)
+            health = 0;
+        monsterState = MonsterState.Dying;
+    }
+
     private void recalculatePosition() {
         coord = monsterPath.getCoord(pathSegmentNumber, offsetInPathSegment);
         direction = monsterPath.getDirection(pathSegmentNumber);

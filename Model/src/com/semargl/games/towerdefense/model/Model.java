@@ -7,9 +7,10 @@ import com.semargl.games.towerdefense.model.monster.MonsterType;
 import com.semargl.games.towerdefense.model.wave.LevelWaves;
 import com.semargl.games.towerdefense.model.wave.WaveClass;
 import com.semargl.games.towerdefense.model.weapon.WeaponClass;
-import com.semargl.games.towerdefense.model.weapon.WeaponLevel;
+import com.semargl.games.towerdefense.model.weapon.WeaponSpec;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class Model {
 
@@ -55,12 +56,12 @@ public class Model {
             "Zombie");
 
     public static WeaponClass WEAPON_MACHINEGUN = new WeaponClass(
-            Arrays.asList(MonsterType.Land, MonsterType.Flying),
+            new HashSet<>(Arrays.asList(MonsterType.Land, MonsterType.Flying)),
             Arrays.asList(
-                    new WeaponLevel(200, 3, 150, 150, 0),
-                    new WeaponLevel(40, 3, 200, 175, 0),
-                    new WeaponLevel(45, 3, 200, 200, 0),
-                    new WeaponLevel(50, 4, 200, 200, 0),
-                    new WeaponLevel(55, 4, 250, 225, 0)
+                    new WeaponSpec(200, 3, 150, 150, 0, 0, 3.14),
+                    new WeaponSpec(40, 3, 200, 175, 0, 0, 3.14),
+                    new WeaponSpec(45, 3, 200, 200, 0, 0, 3.14),
+                    new WeaponSpec(50, 4, 200, 200, 0, 0, 3.14),
+                    new WeaponSpec(55, 4, 250, 225, 0, 0, 3.14)
             ));
 }
