@@ -1,11 +1,12 @@
 package com.semargl.games.towerdefense.model;
 
-import com.semargl.games.towerdefense.model.base.Point;
+import com.semargl.games.towerdefense.model.base.Coord;
 import com.semargl.games.towerdefense.model.monster.MonsterClass;
 import com.semargl.games.towerdefense.model.monster.MonsterPath;
 import com.semargl.games.towerdefense.model.monster.MonsterType;
 import com.semargl.games.towerdefense.model.wave.LevelWaves;
 import com.semargl.games.towerdefense.model.wave.WaveClass;
+import com.semargl.games.towerdefense.model.weapon.Weapon;
 import com.semargl.games.towerdefense.model.weapon.WeaponClass;
 import com.semargl.games.towerdefense.model.weapon.WeaponSpec;
 
@@ -20,22 +21,28 @@ public class Model {
         Location location = initLocation();
         Model model = new Model();
         model.state = new State(location, 0);
+        Weapon w1 = new Weapon(location.weaponClasses.get(0), location.fireCoords.get(0));
+        Weapon w2 = new Weapon(location.weaponClasses.get(0), location.fireCoords.get(1));
+        Weapon w3 = new Weapon(location.weaponClasses.get(0), location.fireCoords.get(2));
+        model.state.weapons.put(w1.coord, w1);
+        model.state.weapons.put(w2.coord, w2);
+        model.state.weapons.put(w3.coord, w3);
         return model;
     }
 
     public static Location initLocation() {
         Location location = new Location();
-        location.size = new Point(500, 500);
+        location.size = new Coord(500, 500);
         location.startHealth = 200;
-        location.firePoints = Arrays.asList(
-                new Point(56, 103), new Point(172, 103), new Point(382, 103),
-                new Point(264, 207), new Point(200, 260), new Point(164, 332),
-                new Point(266, 394), new Point(412, 326));
+        location.fireCoords = Arrays.asList(
+                new Coord(56, 103), new Coord(172, 103), new Coord(382, 103),
+                new Coord(264, 207), new Coord(200, 260), new Coord(164, 332),
+                new Coord(266, 394), new Coord(412, 326));
         location.monsterPaths = Arrays.asList(new MonsterPath(Arrays.asList(
-                new Point(0, 33), new Point(237, 33), new Point(279, 75),
-                new Point(277, 118), new Point(92, 332), new Point(92, 380),
-                new Point(959, 467), new Point(368, 395), new Point(300, 300),
-                new Point(400, 170), new Point(499, 170))),
+                new Coord(0, 33), new Coord(237, 33), new Coord(279, 75),
+                new Coord(277, 118), new Coord(92, 332), new Coord(92, 380),
+                new Coord(959, 467), new Coord(368, 395), new Coord(300, 300),
+                new Coord(400, 170), new Coord(499, 170))),
                 null);
         location.levelWaves = Arrays.asList(new LevelWaves(Arrays.asList(
                 new WaveClass(location.monsterPaths.get(0),

@@ -21,11 +21,11 @@ public class Direction {
         this.angle = angle;
     }
 
-    public Direction(Point from, Point to) {
+    public Direction(Coord from, Coord to) {
         this.angle = Math.atan2(from.y - to.y, from.x - to.x) - Math.PI / 2;
     }
 
-    public boolean almostEquals(Point from, Point to) {
+    public boolean almostEquals(Coord from, Coord to) {
         return almostEquals(new Direction(from, to).angle, DEFAULT_THRESHOLD);
     }
 

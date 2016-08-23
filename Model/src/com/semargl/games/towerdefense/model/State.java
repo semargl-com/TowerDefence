@@ -1,14 +1,13 @@
 package com.semargl.games.towerdefense.model;
 
 import com.semargl.games.towerdefense.Log;
-import com.semargl.games.towerdefense.model.base.Direction;
-import com.semargl.games.towerdefense.model.base.Point;
+import com.semargl.games.towerdefense.model.base.Coord;
 import com.semargl.games.towerdefense.model.monster.Monster;
 import com.semargl.games.towerdefense.model.monster.MonsterClass;
+import com.semargl.games.towerdefense.model.monster.MonsterState;
 import com.semargl.games.towerdefense.model.wave.Wave;
 import com.semargl.games.towerdefense.model.weapon.Weapon;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +26,10 @@ public class State {
     public long lastTime;
     public long currTime;
     public boolean finished = false;
+    public boolean victory = false;
 
     public Wave wave;
-    public Map<Point, Weapon> weapons = new ConcurrentHashMap<>();
+    public Map<Coord, Weapon> weapons = new ConcurrentHashMap<>();
     public List<Monster> monsters = new CopyOnWriteArrayList<>();
 
     public State(Location location, int difficultyLevel) {
@@ -45,13 +45,15 @@ public class State {
 
         checkWave();
 
-        for (Point weaponPoint : weapons.keySet()) {
-            Weapon weapon = weapons.get(weaponPoint);
+        for (Coord weaponCoord : weapons.keySet()) {
+            Weapon weapon = weapons.get(weaponCoord);
             weapon.go(duration, monsters);
         }
 
         for (Monster monster : monsters) {
             monster.go(duration);
+            if (monster.monsterState == MonsterState.Dead)
+                monsters.remove(monster);
         }
 
         checkIsFinished();
@@ -71,9 +73,7 @@ public class State {
             long lastMonsterPause = wave.waveClass.pauses.get(wave.lastMonsterNumber);
             if (wave.lastMonsterTime + lastMonsterPause < currTime) {
                 if (isLastMonsterInWavePushed()) {
-                    if (isLastWave()) {
-                        finished = true;
-                    } else {
+                    if (!isLastWave()) {
                         nextWave();
                     }
                 } else {
@@ -92,8 +92,8 @@ public class State {
     private void pushNextMonster() {
         wave.lastMonsterNumber++;
         MonsterClass monsterClass = wave.waveClass.monsterClasses.get(wave.lastMonsterNumber);
-//        Point coord = wave.waveClass.monsterPath.segment.get(0);
-//        Point nextSegmentCoord = wave.waveClass.monsterPath.segment.get(1);
+//        Coord coord = wave.waveClass.monsterPath.segment.get(0);
+//        Coord nextSegmentCoord = wave.waveClass.monsterPath.segment.get(1);
 //        Direction direction = new Direction(coord, nextSegmentCoord);
         Monster newMonster = new Monster(monsterClass, wave.waveClass.monsterPath, difficultyLevel);
         monsters.add(newMonster);
@@ -101,8 +101,14 @@ public class State {
     }
 
     private void checkIsFinished() {
-        if (isLastWave() && monsters.size() == 0 && isLastMonsterInWavePushed()) {
+        if (health <= 0) {
+            Log.debug("Finished. health = " + health);
             finished = true;
+        }
+        else if (isLastWave() && monsters.size() == 0 && isLastMonsterInWavePushed()) {
+            Log.debug("Finished. monsters.size = " + monsters.size());
+            finished = true;
+            victory = true;
         }
     }
 

@@ -1,20 +1,20 @@
 package com.semargl.games.towerdefense.model.monster;
 
+import com.semargl.games.towerdefense.model.base.Coord;
 import com.semargl.games.towerdefense.model.base.Direction;
-import com.semargl.games.towerdefense.model.base.Point;
 
 import java.util.List;
 
 public class MonsterPath {
 
-    public List<Point> segment;
+    public List<Coord> segment;
 
-    public MonsterPath(List<Point> segment) {
+    public MonsterPath(List<Coord> segment) {
         this.segment = segment;
     }
 
-    public Point getCoord(int segmentNumber, double offset) {
-        Point coord = segment.get(segmentNumber);
+    public Coord getCoord(int segmentNumber, double offset) {
+        Coord coord = segment.get(segmentNumber);
         Direction direction = getDirection(segmentNumber);
         return coord.getOffsetCoord(direction, offset);
     }

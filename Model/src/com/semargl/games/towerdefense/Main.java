@@ -19,9 +19,11 @@ public class Main {
         do {
             model.state.next();
             view.draw();
-            if (!controller.sleep(100))
+            if (!controller.sleep(100)) {
+                Log.error("Break");
                 break;
+            }
         } while(!model.state.finished);
-
+        Log.debug(model.state.victory ? "You win" : "You lose");
     }
 }

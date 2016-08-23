@@ -1,6 +1,6 @@
 package com.semargl.games.towerdefense.model.weapon;
 
-import com.semargl.games.towerdefense.model.base.Point;
+import com.semargl.games.towerdefense.model.base.Coord;
 import com.semargl.games.towerdefense.model.monster.Monster;
 import com.semargl.games.towerdefense.model.base.Direction;
 import com.semargl.games.towerdefense.model.monster.MonsterState;
@@ -15,13 +15,14 @@ public class Weapon {
     public WeaponClass weaponClass;
     public int level;
     public WeaponState weaponState;
-    public Point coord;
+    public Coord coord;
     public Direction direction;
     public WeaponSpec spec;
     public Monster targetMonster;
     public long actingTime;
+    public double progress;
 
-    public Weapon(WeaponClass weaponClass, Point coord) {
+    public Weapon(WeaponClass weaponClass, Coord coord) {
         this.weaponClass = weaponClass;
         this.coord = coord;
         direction = new Direction();
@@ -37,10 +38,12 @@ public class Weapon {
                 nextLevel();
                 weaponState = WeaponState.Ready;
                 actingTime = 0;
+            } else {
+                progress = actingTime / BUILD_TIME;
             }
         }
         else if (weaponState == WeaponState.Ready) {
-            Monster targetMonster = findMonster(monsters);
+            targetMonster = findMonster(monsters);
             if (targetMonster != null) {
                 if (direction.almostEquals(coord, targetMonster.coord)) {
                     weaponState = WeaponState.Firing;
@@ -70,12 +73,16 @@ public class Weapon {
             if (checkMonster(targetMonster)) {
                 if (actingTime >= spec.rechargeTime) {
                     weaponState = WeaponState.Firing;
+                } else {
+                    progress = actingTime / spec.rechargeTime;
                 }
                 direction.angle = coord.angle(targetMonster.coord);
             }
             else {
                 if (actingTime >= spec.rechargeTime) {
                     weaponState = WeaponState.Ready;
+                } else {
+                    progress = actingTime / spec.rechargeTime;
                 }
             }
         }

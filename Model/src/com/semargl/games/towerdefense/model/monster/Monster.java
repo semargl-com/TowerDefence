@@ -1,10 +1,12 @@
 package com.semargl.games.towerdefense.model.monster;
 
 import com.semargl.games.towerdefense.Log;
+import com.semargl.games.towerdefense.model.base.Coord;
 import com.semargl.games.towerdefense.model.base.Direction;
-import com.semargl.games.towerdefense.model.base.Point;
 
 public class Monster {
+
+    public static final long DYING_TIME = 2000;
 
     public MonsterClass monsterClass;
     public MonsterState monsterState = MonsterState.Normal;
@@ -12,8 +14,10 @@ public class Monster {
     public MonsterPath monsterPath;
     public int pathSegmentNumber;
     public double offsetInPathSegment;
+    public long actingTime;
+    public double progress;
 
-    public Point coord;
+    public Coord coord;
     public Direction direction;
 
     public Monster(MonsterClass monsterClass, MonsterPath monsterPath, int difficultyLevel) {
@@ -25,6 +29,7 @@ public class Monster {
     }
 
     public void go(long duration) {
+        actingTime += duration;
         if (monsterState == MonsterState.Normal) {
             double distance = duration * monsterClass.speed / 60_000;
             double leftInSegment = coord.distance(monsterPath.segment.get(pathSegmentNumber + 1));
@@ -36,13 +41,23 @@ public class Monster {
             }
             recalculatePosition();
         }
+        else if (monsterState == MonsterState.Dying) {
+            if (actingTime >= DYING_TIME) {
+                monsterState = MonsterState.Dead;
+                actingTime = 0;
+            } else {
+                progress = actingTime / DYING_TIME;
+            }
+        }
     }
 
     public void hit(int damage) {
         health -= damage;
-        if (health < 0)
+        if (health <= 0) {
             health = 0;
-        monsterState = MonsterState.Dying;
+            monsterState = MonsterState.Dying;
+        }
+        Log.debug("Monster hit damage: " + damage + ", health left: " + health);
     }
 
     private void recalculatePosition() {

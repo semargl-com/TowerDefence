@@ -1,26 +1,26 @@
 package com.semargl.games.towerdefense.model.base;
 
-public class Point {
+public class Coord {
     public double x;
     public double y;
 
-    public Point() {}
+    public Coord() {}
 
-    public Point(double x, double y) {
+    public Coord(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public double distance(Point p) {
+    public double distance(Coord p) {
         return Math.hypot(x - p.x, y - p.y);
     }
 
-    public double angle(Point p) {
+    public double angle(Coord p) {
         return Math.atan2(y - p.y, x - p.x) - Math.PI / 2;
     }
 
-    public Point getOffsetCoord(Direction direction, double offset) {
-        return new Point(x + (offset * direction.xCoef()), y + (offset * direction.yCoef()));
+    public Coord getOffsetCoord(Direction direction, double offset) {
+        return new Coord(x + (offset * direction.xCoef()), y + (offset * direction.yCoef()));
     }
 
     @Override
@@ -28,8 +28,8 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        Point point = (Point) o;
-        return x == point.x && y == point.y;
+        Coord coord = (Coord) o;
+        return x == coord.x && y == coord.y;
     }
 
     @Override

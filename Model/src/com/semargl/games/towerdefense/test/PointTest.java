@@ -1,15 +1,15 @@
 package com.semargl.games.towerdefense.test;
 
 import com.semargl.games.towerdefense.Log;
+import com.semargl.games.towerdefense.model.base.Coord;
 import com.semargl.games.towerdefense.model.base.Direction;
-import com.semargl.games.towerdefense.model.base.Point;
 
 public class PointTest {
 
-    static Point p1 = new Point(10, 20);
-    static Point p2 = new Point(15, 2);
-    static Point p1x = new Point(10, 30);
-    static Point p1y = new Point(30, 20);
+    static Coord p1 = new Coord(10, 20);
+    static Coord p2 = new Coord(15, 2);
+    static Coord p1x = new Coord(10, 30);
+    static Coord p1y = new Coord(30, 20);
 
     public static void main(String[] args) {
         Log.debug("\n");
@@ -23,7 +23,7 @@ public class PointTest {
     }
 
     public static void testOffsetCoord() {
-        //Point p = new Point();
+        //Coord p = new Coord();
         Log.debug("DOWN_RIGHT x: " + new Direction(Direction.DOWN_RIGHT).xCoef());
         Log.debug("DOWN_RIGHT y: " + new Direction(Direction.DOWN_RIGHT).yCoef());
         Log.debug("UP_LEFT x: " + new Direction(Direction.UP_LEFT).xCoef());
@@ -51,10 +51,10 @@ public class PointTest {
         Log.debug("angle p1y p1: " + p1y.angle(p1));
         Log.debug("angle p2 p1y: " + p2.angle(p1y));
 
-//        Point p31 = new Point(10, 10);
-//        Point p32 = new Point(30, 10);
-//        Point p33 = new Point(30, 30);
-//        Point p34 = new Point(10, 30);
+//        Coord p31 = new Coord(10, 10);
+//        Coord p32 = new Coord(30, 10);
+//        Coord p33 = new Coord(30, 30);
+//        Coord p34 = new Coord(10, 30);
 //        Log.debug("angle p34 p32: " + p34.angle(p32));
 //        Log.debug("angle p31 p33: " + p31.angle(p33));
 //        Log.debug("angle p32 p34: " + p32.angle(p34));
