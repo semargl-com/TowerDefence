@@ -13,4 +13,9 @@ public class Log {
     public static void error(String s) {
         System.out.println("[ERROR] " + s);
     }
+
+    public static void error(String s, Throwable t) {
+        error(s);
+        t.printStackTrace();
+    }
 }

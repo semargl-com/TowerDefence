@@ -7,6 +7,7 @@ import com.semargl.games.towerdefense.model.base.Coord;
 import com.semargl.games.towerdefense.model.monster.Monster;
 import com.semargl.games.towerdefense.model.weapon.Weapon;
 import com.semargl.games.towerdefense.model.weapon.WeaponState;
+import com.semargl.games.towerdefense.view.sprite.SpriteStorage;
 
 import javax.swing.*;
 import java.io.*;
@@ -17,6 +18,7 @@ import javax.imageio.*;
 public class PaintImagePanel extends JPanel {
 
     public static BufferedImage image;
+    SpriteStorage spriteStorage;
     Model model;
 
     public PaintImagePanel(Model model) {
@@ -26,6 +28,7 @@ public class PaintImagePanel extends JPanel {
 
         try {
             image = ImageIO.read(new File("res/location0.png"));
+            spriteStorage = SpriteStorage.createDemoStorage();
         } catch (IOException e) {
             Log.error("Can't load image");
         }
@@ -44,7 +47,7 @@ public class PaintImagePanel extends JPanel {
         State state = model.state;
 
         for (Monster monster : state.monsters) {
-            drawMonster(g, monster);
+            drawMonster2(g, monster);
         }
 
         for (Weapon weapon : state.weapons.values()) {
@@ -52,6 +55,11 @@ public class PaintImagePanel extends JPanel {
         }
 
         g.drawString("Health: " + state.health + ", Money: " + state.money + ", Wave: " + state.waveNumber, 1, 20);
+        spriteStorage.rotateAllFrames();
+    }
+
+    private void drawMonster2(Graphics g, Monster monster) {
+        spriteStorage.drawSprite(g, monster.monsterClass, monster.coord, monster.direction);
     }
 
     private void drawMonster(Graphics g, Monster monster) {
